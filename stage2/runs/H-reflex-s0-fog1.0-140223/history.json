@@ -1,0 +1,50 @@
+[
+  {
+    "step": 100000,
+    "deaths": 191,
+    "died_energy": 0,
+    "died_temp": 0,
+    "mean_lifespan": 601.38,
+    "energy": 0.3947788178920746,
+    "temp": 0.2559893727302551,
+    "eaten_total": 113.46,
+    "reflex_temp": 5266,
+    "reflex_energy": 24295,
+    "health": 0.7331004831575562,
+    "elapsed": 328,
+    "contingency_food": 0.579273373937447,
+    "contingency_temp": -0.47852886335356803
+  },
+  {
+    "step": 200000,
+    "deaths": 333,
+    "died_energy": 0,
+    "died_temp": 0,
+    "mean_lifespan": 684.3,
+    "energy": 0.3356141448020935,
+    "temp": -0.11060816794633865,
+    "eaten_total": 275.82,
+    "reflex_temp": 6896,
+    "reflex_energy": 49033,
+    "health": 0.9958245927105913,
+    "elapsed": 783,
+    "contingency_food": 0.5442561784380733,
+    "contingency_temp": -0.24198868003405147
+  },
+  {
+    "step": 300000,
+    "deaths": 474,
+    "died_energy": 0,
+    "died_temp": 0,
+    "mean_lifespan": 759.98,
+    "energy": 0.516186535358429,
+    "temp": 0.4659823179244995,
+    "eaten_total": 461.34,
+    "reflex_temp": 8421,
+    "reflex_energy": 74337,
+    "health": 0.2545035324601108,
+    "elapsed": 1218,
+    "contingency_food": 0.40107881616175983,
+    "contingency_temp": -0.2219141754303411
+  }
+]

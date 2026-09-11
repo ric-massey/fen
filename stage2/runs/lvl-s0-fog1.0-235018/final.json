@@ -1,0 +1,15 @@
+{
+  "steps": 250000,
+  "seed": 0,
+  "fog": 1.0,
+  "gamma": 0.999,
+  "died_energy": 597,
+  "died_temp": 2,
+  "deaths": 599,
+  "mean_lifespan": 442.9,
+  "eaten_total": 59.23,
+  "contingency_food": 0.07721616220795766,
+  "contingency_temp": -0.22363568655829577,
+  "gate_survival": false,
+  "gate_contingency": true
+}

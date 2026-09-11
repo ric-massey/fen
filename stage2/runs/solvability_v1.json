@@ -1,0 +1,25 @@
+{
+  "lifespans": [
+    1411,
+    30001,
+    5725,
+    28963,
+    17469,
+    4941,
+    2635,
+    18081
+  ],
+  "causes": [
+    "hazard",
+    "survived",
+    "neglect",
+    "hazard",
+    "neglect",
+    "neglect",
+    "hazard",
+    "neglect"
+  ],
+  "mean_cycles": 13.65325,
+  "median_cycles": 11.597,
+  "passes": true
+}

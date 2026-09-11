@@ -1,0 +1,30 @@
+=== representation gate, transformer core, 5 seeds (0..4), 5000 steps, stride 8 ===
+  seed 0: mi_gain +0.0392   (547s, 1/5, 547s total)
+  seed 1: mi_gain -0.0399   (514s, 2/5, 1061s total)
+  seed 2: mi_gain -0.0417   (522s, 3/5, 1583s total)
+  seed 3: mi_gain +0.0482   (546s, 4/5, 2129s total)
+  seed 4: mi_gain +0.0345   (524s, 5/5, 2653s total)
+
+==========================================================================
+attention vs no-attention, per factor (mean over 5 seeds)
+factor             delta       sd              95% CI   seeds +
+x                 +0.004    0.051 [ -0.060, +0.068]    2/5
+y                 -0.006    0.049 [ -0.066, +0.055]    3/5
+energy            +0.027    0.033 [ -0.014, +0.067]    4/5
+temp              -0.000    0.034 [ -0.042, +0.041]    4/5
+health            +0.028    0.050 [ -0.034, +0.090]    4/5
+near_food         -0.002    0.055 [ -0.070, +0.065]    3/5
+warm              -0.003    0.046 [ -0.060, +0.054]    2/5
+reflex            +0.028    0.078 [ -0.068, +0.125]    3/5
+stress            +0.002    0.111 [ -0.136, +0.139]    3/5
+thermal_proj      +0.003    0.038 [ -0.044, +0.050]    3/5
+
+codebook (attention): live 128.0/128  perplexity 100.6 ± 5.1
+context gain on prediction: +0.0023 ± 0.0104
+context gain on mean MI:    +0.0080 ± 0.0449   95% CI [-0.0477, +0.0638]   n=5
+per-seed: +0.0392, -0.0399, -0.0417, +0.0482, +0.0345
+vs zero: t=+0.40  p=0.709
+
+verdict (threshold +0.020): UNDECIDED — the CI straddles the threshold
+  to separate +0.0080 from +0.020 at 95%: ~55 seeds (have 5)
+written to /Users/ricmassey/fen/stage3/runs/v2stride8-transformer-summary.json

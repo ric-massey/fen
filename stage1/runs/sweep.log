@@ -1,0 +1,23 @@
+  stack=1 seed=0  step-onset 0.979  ramped 0.882
+  stack=1 seed=1  step-onset 0.974  ramped 0.884
+  stack=1 seed=2  step-onset 0.973  ramped 0.884
+  stack=2 seed=0  step-onset 0.958  ramped 0.890
+  stack=2 seed=1  step-onset 0.963  ramped 0.902
+  stack=2 seed=2  step-onset 0.964  ramped 0.896
+  stack=4 seed=0  step-onset 0.959  ramped 0.868
+  stack=4 seed=1  step-onset 0.960  ramped 0.881
+  stack=4 seed=2  step-onset 0.958  ramped 0.872
+  stack=8 seed=0  step-onset 0.946  ramped 0.836
+  stack=8 seed=1  step-onset 0.963  ramped 0.884
+  stack=8 seed=2  step-onset 0.959  ramped 0.874
+
+======================================================================
+ stack         step-onset             ramped     point (ramped)
+----------------------------------------------------------------------
+     1      0.975 ± 0.003      0.883 ± 0.001      0.918 ± 0.003
+     2      0.961 ± 0.003      0.896 ± 0.005      0.898 ± 0.007
+     4      0.959 ± 0.001      0.874 ± 0.006      0.873 ± 0.005
+     8      0.956 ± 0.007      0.865 ± 0.021      0.868 ± 0.015
+======================================================================
+Read the ramped column. Step-onset overstates the capability because
+a discontinuity is detectable without understanding the body at all.

@@ -1,0 +1,47 @@
+{
+  "steps": 12000,
+  "seed": 0,
+  "deaths": 3,
+  "mean_cycles": 3.4516666666666667,
+  "median_cycles": 2.386,
+  "all_lifespans": [
+    737,
+    2386,
+    7232
+  ],
+  "causes": {
+    "neglect": 0,
+    "hazard": 3
+  },
+  "vq": {
+    "live_codes": 128,
+    "n_codes": 128,
+    "usage_entropy": 3.7797391414642334,
+    "max_entropy": 4.852030277252197,
+    "perplexity": 43.80461120605469
+  },
+  "history": [
+    {
+      "step": 4000,
+      "deaths": 2,
+      "mean_cycles": 1.5615,
+      "median_cycles": 1.5615,
+      "live_codes": 128,
+      "perplexity": 42.7,
+      "neglect": 0,
+      "hazard": 2,
+      "elapsed": 14
+    },
+    {
+      "step": 8000,
+      "deaths": 2,
+      "mean_cycles": 1.5615,
+      "median_cycles": 1.5615,
+      "live_codes": 128,
+      "perplexity": 43.7,
+      "neglect": 0,
+      "hazard": 2,
+      "elapsed": 48
+    }
+  ]
+}

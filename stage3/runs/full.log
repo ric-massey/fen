@@ -1,0 +1,37 @@
+
+=== recurrent ===
+  [recurrent]   1000  pred 0.1132  vq 0.0280  live 128/128  perplexity 106.4  (57s)
+  [recurrent]   2000  pred 0.1061  vq 0.0272  live 128/128  perplexity 104.7  (113s)
+  [recurrent]   3000  pred 0.1019  vq 0.0175  live 128/128  perplexity 106.6  (174s)
+  [recurrent]   4000  pred 0.1256  vq 0.0105  live 128/128  perplexity 106.2  (239s)
+  [recurrent]   5000  pred 0.1300  vq 0.0122  live 128/128  perplexity 107.2  (304s)
+
+=== no-recurrence ===
+  [no-recurrence]   1000  pred 0.1142  vq 0.0299  live 128/128  perplexity 104.3  (59s)
+  [no-recurrence]   2000  pred 0.1035  vq 0.0319  live 128/128  perplexity 105.5  (117s)
+  [no-recurrence]   3000  pred 0.0933  vq 0.0277  live 128/128  perplexity 104.7  (176s)
+  [no-recurrence]   4000  pred 0.1085  vq 0.0269  live 128/128  perplexity 104.6  (235s)
+  [no-recurrence]   5000  pred 0.1022  vq 0.0394  live 128/128  perplexity 104.4  (294s)
+
+=== untrained ===
+
+========================================================================
+                     pred    live   perplex
+recurrent          0.1778  128/128     107.2
+no-recurrence      0.1460  128/128     104.4
+untrained          0.2637    0/128       1.0
+
+Normalised MI(code ; ground truth) — fraction of each factor captured
+factor         recurrent    no-recur   untrained  gain vs untr
+x                  0.500       0.365       0.016        +0.484
+y                  0.483       0.345       0.008        +0.475
+energy             0.511       0.434       0.010        +0.501
+temp               0.508       0.426       0.024        +0.484
+health             0.432       0.342       0.016        +0.415
+near_food          0.578       0.330       0.018        +0.560
+warm               0.571       0.355       0.006        +0.565
+reflex             0.780       0.671       0.024        +0.756
+stress             0.734       0.547       0.004        +0.730
+
+recurrence gain on prediction: -0.0318 (RECURRENCE IS DECORATION)
+written to runs/full-s0-150956

@@ -1,0 +1,11 @@
+{
+  "steps": 300000,
+  "seed": 0,
+  "buffer": 100000,
+  "batch": 256,
+  "lr": 0.001,
+  "train_every": 2,
+  "eval_every": 50000,
+  "warmup": 5000,
+  "tag": "long"
+}

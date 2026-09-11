@@ -1,0 +1,5 @@
+    50000  cycles   2.48 (med  2.39)  deaths   19 [N7/H12]  codes 128 perp  35.2  (470s)
+   100000  cycles   2.43 (med  2.44)  deaths   40 [N14/H26]  codes 128 perp  30.5  (1030s)
+   150000  cycles   1.97 (med  1.51)  deaths   76 [N28/H48]  codes 128 perp  34.8  (1567s)
+   200000  cycles   1.84 (med  1.25)  deaths  108 [N47/H61]  codes 128 perp  33.0  (2003s)
+   250000  cycles   1.80 (med  1.25)  deaths  139 [N67/H72]  codes 128 perp  21.2  (12001s)

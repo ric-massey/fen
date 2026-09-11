@@ -1,0 +1,13 @@
+{
+  "auc_all": 0.9015362617450791,
+  "auc_step": 0.974108388477319,
+  "auc_ramp": 0.8837045075663853,
+  "auc_point_ramp": 0.921796772143972,
+  "surprise_self": -3.1727123260498047,
+  "surprise_world": 19.840288162231445,
+  "n_eval": 14871,
+  "step": 200000,
+  "seed": 1,
+  "stack": 1,
+  "gate_passed_ramped": false
+}

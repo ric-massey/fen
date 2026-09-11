@@ -1,0 +1,16 @@
+{
+  "steps": 200000,
+  "seed": 1,
+  "stack": 4,
+  "buffer": 100000,
+  "batch": 256,
+  "lr": 0.001,
+  "train_every": 2,
+  "eval_every": 50000,
+  "warmup": 5000,
+  "point_warmup": 40000,
+  "force": 12.0,
+  "ramp_prob": 0.5,
+  "tag": "sweep",
+  "quiet": true
+}

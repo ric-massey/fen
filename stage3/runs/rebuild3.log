@@ -1,0 +1,4 @@
+wrote data/traj.npz: 150000 steps, 45 deaths
+ground truth recorded: x, y, energy, temp, health, near_food, warm, reflex, stress, thermal_proj
+
+=== attention ===

@@ -1,0 +1,71 @@
+=== 1/4 collect ===
+wrote data/traj.npz: 150000 steps, 45 deaths
+ground truth recorded: x, y, energy, temp, health, near_food, warm, reflex, stress, thermal_proj
+=== 2/4 representation ===
+
+=== attention ===
+  [attention]    833  pred 0.1542  vq 0.0126  live 128/128  perplexity 85.0  (52s)
+  [attention]   1666  pred 0.1596  vq 0.0142  live 128/128  perplexity 87.9  (103s)
+  [attention]   2499  pred 0.1387  vq 0.0171  live 128/128  perplexity 85.0  (156s)
+  [attention]   3332  pred 0.1305  vq 0.0204  live 128/128  perplexity 79.0  (207s)
+  [attention]   4165  pred 0.1540  vq 0.0301  live 128/128  perplexity 79.2  (254s)
+  [attention]   4998  pred 0.1539  vq 0.0207  live 128/128  perplexity 77.2  (301s)
+
+=== no-attention ===
+  [no-attention]    833  pred 0.1513  vq 0.0166  live 128/128  perplexity 77.8  (48s)
+  [no-attention]   1666  pred 0.1591  vq 0.0133  live 128/128  perplexity 79.5  (96s)
+  [no-attention]   2499  pred 0.1444  vq 0.0127  live 128/128  perplexity 86.1  (145s)
+  [no-attention]   3332  pred 0.1359  vq 0.0183  live 128/128  perplexity 81.2  (193s)
+  [no-attention]   4165  pred 0.1589  vq 0.0275  live 128/128  perplexity 81.2  (241s)
+  [no-attention]   4998  pred 0.1582  vq 0.0169  live 128/128  perplexity 78.8  (290s)
+
+=== untrained ===
+
+========================================================================
+                     pred    live   perplex
+attention          0.1368  128/128      77.5
+no-attention       0.1440  128/128      79.1
+untrained          0.2458    0/128       1.0
+
+Normalised MI(code ; ground truth) — fraction of each factor captured
+factor         recurrent    no-recur   untrained  gain vs untr
+x                  0.588       0.601       0.071        +0.517
+y                  0.533       0.511       0.083        +0.449
+energy             0.565       0.517       0.051        +0.514
+temp               0.553       0.644       0.044        +0.509
+health             0.590       0.566       0.025        +0.565
+near_food          0.501       0.565       0.062        +0.439
+warm               0.355       0.390       0.031        +0.324
+reflex             0.882       0.885       0.048        +0.834
+stress             0.634       0.653       0.037        +0.598
+thermal_proj       0.510       0.581       0.049        +0.461
+
+context gain on prediction: +0.0072
+context gain on mean MI:    -0.0201  (CONTEXT IS DECORATION)
+written to runs/v1-s0-211653
+=== 3/4 organism ===
+    50000  cycles   1.82 (med  1.43)  deaths   26 [N17/H9]  codes 128 perp  44.6  (371s)
+   100000  cycles   1.92 (med  1.50)  deaths   50 [N27/H23]  codes 128 perp  37.0  (825s)
+   150000  cycles   1.93 (med  1.48)  deaths   77 [N43/H34]  codes 128 perp  36.8  (1331s)
+   200000  cycles   1.85 (med  1.48)  deaths  107 [N60/H47]  codes 128 perp  36.3  (1846s)
+   250000  cycles   1.75 (med  1.43)  deaths  143 [N79/H64]  codes 128 perp  31.6  (2373s)
+
+============================================================
+transformer-as-organism: 1.66 cycles (median 1.38), 181 deaths
+  codebook: 128 live, perplexity 35.9
+  reference: competent hand-written ~7.0 cycles, idle ~2.3
+  runs/v1org-s0-212648
+=== 4/4 mlp baseline ===
+step   50000  life    1938  deaths   25  eaten   52.02  food-cont +0.196  temp-cont -0.308  hp 1.00  (169s)
+step  100000  life    2104  deaths   47  eaten  117.47  food-cont +0.263  temp-cont -0.323  hp 0.89  (357s)
+step  150000  life    2207  deaths   67  eaten  177.08  food-cont +0.379  temp-cont -0.201  hp 1.00  (542s)
+step  200000  life    2529  deaths   84  eaten  245.93  food-cont +0.411  temp-cont -0.241  hp 0.31  (726s)
+step  250000  life    2579  deaths  107  eaten  313.73  food-cont +0.336  temp-cont -0.255  hp 1.00  (908s)
+
+==================================================================
+FINAL  mean lifespan 2361  deaths 125
+  food contingency +0.135  temp contingency -0.294
+  survival gate    FAIL
+  contingency gate FAIL
+  /Users/ricmassey/fen/stage2/runs/v1mlp-s0-fog1.0-221517
+==================================================================

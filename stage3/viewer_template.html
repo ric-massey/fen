@@ -1,0 +1,324 @@
+<title>Fen</title>
+<style>
+  :root {
+    --bg: #15151a; --panel: #1c1c23; --line: #33333f;
+    --fg: #e8e8ee; --dim: #8a8a99;
+    --energy: #5fd06a; --temp: #e0873f; --health: #7aa6e0; --warn: #ff4d4d;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 48px; }
+  h1 { font-size: 21px; margin: 0 0 4px; font-weight: 600; letter-spacing: -0.01em; }
+  .sub { color: var(--dim); font-size: 13px; margin-bottom: 22px; max-width: 62ch; }
+  .stage { display: grid; grid-template-columns: 1fr 260px; gap: 18px; align-items: start; }
+  @media (max-width: 820px) { .stage { grid-template-columns: 1fr; } }
+  canvas { width: 100%; height: auto; display: block; background: var(--panel);
+           border: 1px solid var(--line); border-radius: 8px; }
+  .side { display: flex; flex-direction: column; gap: 14px; }
+  .meter label { display: flex; justify-content: space-between; font-size: 11px;
+                 color: var(--dim); margin-bottom: 4px; letter-spacing: 0.04em;
+                 text-transform: uppercase; }
+  .track { height: 16px; background: #2a2a33; border-radius: 3px; overflow: hidden;
+           position: relative; }
+  .fill { height: 100%; width: 0; transition: width 60ms linear; }
+  .mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+         background: #6a6a78; }
+  .sym { display: flex; align-items: center; gap: 10px; }
+  .swatch { width: 46px; height: 46px; border-radius: 6px; border: 1px solid var(--line); }
+  .symtxt { font-size: 12px; color: var(--dim); }
+  .symtxt b { color: var(--fg); font-size: 17px; display: block; font-variant-numeric: tabular-nums; }
+  .controls { display: flex; gap: 10px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+  button { background: #262630; color: var(--fg); border: 1px solid var(--line);
+           padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  button:hover { background: #30303c; }
+  input[type=range] { flex: 1; min-width: 160px; accent-color: var(--energy); }
+  .t { color: var(--dim); font-size: 12px; font-variant-numeric: tabular-nums; min-width: 92px; }
+  .legend { margin-top: 20px; color: var(--dim); font-size: 12.5px; max-width: 78ch; }
+  h2 { font-size: 16px; margin: 34px 0 6px; font-weight: 600; }
+  .note { color: var(--dim); font-size: 12.5px; max-width: 78ch; margin-bottom: 14px; }
+  table { border-collapse: collapse; font-size: 12.5px; margin-bottom: 6px; }
+  th, td { padding: 5px 14px 5px 0; text-align: right; font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--dim); font-weight: 500; border-bottom: 1px solid var(--line);
+       font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mibar { display: inline-block; height: 9px; border-radius: 2px; vertical-align: middle;
+           margin-right: 7px; }
+  .pass { color: var(--energy); } .fail { color: var(--warn); }
+  #clipbar button.on { background: var(--energy); color: #10240f; border-color: var(--energy); }
+  #clipbar .cyc { color: var(--dim); font-size: 11px; margin-left: 2px; }
+  .legend b { color: var(--fg); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <h1>Fen</h1>
+  <div class="sub">
+    An artificial organism with a body, drives it must regulate, and damage it
+    carries. The colour strip is its own vocabulary — symbols it derived from
+    experience, not from anything human. The buttons below step through training,
+    ending with a six-line hand-written policy for comparison.
+  </div>
+
+  <div class="stage">
+    <canvas id="world" width="760" height="760"></canvas>
+    <div class="side">
+      <div class="meter"><label><span>Energy</span><span id="e-v"></span></label>
+        <div class="track"><div class="fill" id="e-f" style="background:var(--energy)"></div></div></div>
+      <div class="meter"><label><span>Temperature</span><span id="t-v"></span></label>
+        <div class="track"><div class="fill" id="t-f" style="background:var(--temp)"></div><div class="mid"></div></div></div>
+      <div class="meter"><label><span>Health</span><span id="h-v"></span></label>
+        <div class="track"><div class="fill" id="h-f" style="background:var(--health)"></div></div></div>
+      <div class="meter"><label><span>Fear</span><span id="a-v"></span></label>
+        <div class="track"><div class="fill" id="a-f" style="background:var(--warn)"></div></div></div>
+      <div class="sym">
+        <div class="swatch" id="sw"></div>
+        <div class="symtxt">symbol<b id="code">—</b></div>
+      </div>
+      <canvas id="strip" width="260" height="46"
+              style="border-radius:6px;border:1px solid var(--line)"></canvas>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="play">Pause</button>
+    <input type="range" id="scrub" min="0" value="0">
+    <span class="t" id="time"></span>
+    <button id="speed">1×</button>
+  </div>
+  <div class="controls" id="clipbar"></div>
+
+  <div id="results"></div>
+
+  <div class="legend">
+    The <b>warm-to-cool gradient</b> and the <b>food positions</b> are re-drawn every
+    life, so nothing about this world can be memorised — it has to sense which way is
+    warm and read its own temperature to know whether to go there. There is always
+    food on the warm side and food on the cool side, so eating is a choice with a
+    cost rather than a compulsion. <b>Green rings</b> are food, fading as eaten and
+    regrowing on a cycle. <b>Orange flashes</b> are innate reflexes firing. The trail
+    is coloured by energy. The <b>red region</b> is a hazard — it roams, and about
+    33 steps of contact is fatal. As it closes, the organism's <b>fear</b> rises and
+    the whole view tints: fear is a bodily state, not a signal. While afraid it burns
+    more energy and gets measurably worse at reading its own hunger and temperature —
+    attentional narrowing, so self-knowledge is not constant but varies with how
+    frightened it is.
+  </div>
+</div>
+
+<script>
+const D = /*__DATA__*/null;
+const F = D.frames, N = F.length, A = D.arena;
+const cv = document.getElementById('world'), cx = cv.getContext('2d');
+const st = document.getElementById('strip'), sx = st.getContext('2d');
+const S = cv.width;
+
+const px = x => (x / A * 0.5 + 0.5) * S;
+const py = y => (1 - (y / A * 0.5 + 0.5)) * S;
+
+function codeColour(i) {
+  const h = (i * 0.618033988749895) % 1;
+  return `hsl(${h * 360}, 62%, 58%)`;
+}
+function energyColour(e) { return `hsl(${120 * e}, 65%, ${38 + 18 * e}%)`; }
+
+let f = 0, playing = true, speed = 1, trail = [];
+let F_ = D.clips ? D.clips[0].frames : D.frames;
+let N_ = F_.length;
+
+// Training timeline: one clip per checkpoint, so you can watch it across
+// training rather than only seeing a finished policy.
+if (D.clips) {
+  const bar = document.getElementById('clipbar');
+  D.clips.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = c.label + ' <span class="cyc">' + c.cycles.toFixed(1) + ' cyc</span>';
+    if (i === 0) b.className = 'on';
+    b.onclick = () => {
+      [...bar.children].forEach(x => x.className = '');
+      b.className = 'on';
+      F_ = c.frames; N_ = F_.length; f = 0; trail = [];
+      document.getElementById('scrub').max = N_ - 1;
+      render(0);
+    };
+    bar.appendChild(b);
+  });
+}
+
+function drawWorld(k) {
+  const d = F_[k];
+  cx.fillStyle = '#1c1c23'; cx.fillRect(0, 0, S, S);
+  // thermal field runs along a per-episode random axis, not a fixed side
+  const ax = d[12] || [1, 0];
+  const g = cx.createLinearGradient(S/2 - ax[0]*S/2, S/2 + ax[1]*S/2,
+                                    S/2 + ax[0]*S/2, S/2 - ax[1]*S/2);
+  g.addColorStop(0, 'rgba(35,60,120,0.42)');
+  g.addColorStop(0.5, 'rgba(28,28,35,0.10)');
+  g.addColorStop(1, 'rgba(120,45,35,0.42)');
+  cx.fillStyle = g; cx.fillRect(0, 0, S, S);
+  cx.strokeStyle = '#33333f'; cx.lineWidth = 2; cx.strokeRect(1, 1, S - 2, S - 2);
+
+  cx.font = '600 13px system-ui';
+  cx.fillStyle = '#c8836a';
+  cx.fillText('WARM', S/2 + ax[0]*S*0.40 - 20, S/2 - ax[1]*S*0.40 + 5);
+  cx.fillStyle = '#6a94c8';
+  cx.fillText('COOL', S/2 - ax[0]*S*0.40 - 20, S/2 + ax[1]*S*0.40 + 5);
+
+  (d[13] || D.food).forEach((p, i) => {
+    const c = d[10][i], r = D.reach / A * 0.5 * S;
+    cx.beginPath(); cx.arc(px(p[0]), py(p[1]), r, 0, 7);
+    cx.strokeStyle = `rgba(95,208,106,${0.18 + 0.5 * c})`; cx.lineWidth = 2; cx.stroke();
+    cx.beginPath(); cx.arc(px(p[0]), py(p[1]), 5 + 7 * c, 0, 7);
+    cx.fillStyle = `rgba(95,208,106,${0.3 + 0.7 * c})`; cx.fill();
+  });
+
+  cx.lineWidth = 2;
+  for (let i = 1; i < trail.length; i++) {
+    cx.beginPath();
+    cx.moveTo(px(trail[i - 1][0]), py(trail[i - 1][1]));
+    cx.lineTo(px(trail[i][0]), py(trail[i][1]));
+    cx.strokeStyle = energyColour(trail[i][2]);
+    cx.globalAlpha = 0.25 + 0.75 * (i / trail.length);
+    cx.stroke();
+  }
+  cx.globalAlpha = 1;
+
+  // the hazard: a roaming region that injures fast on contact
+  if (d[14]) {
+    const hr = (D.hazrad || 0.55) / A * 0.5 * S;
+    const hx = px(d[14][0]), hy = py(d[14][1]);
+    const hg = cx.createRadialGradient(hx, hy, 0, hx, hy, hr * 1.9);
+    hg.addColorStop(0, 'rgba(255,60,60,0.42)');
+    hg.addColorStop(0.55, 'rgba(255,60,60,0.16)');
+    hg.addColorStop(1, 'rgba(255,60,60,0)');
+    cx.fillStyle = hg; cx.beginPath(); cx.arc(hx, hy, hr * 1.9, 0, 7); cx.fill();
+    cx.beginPath(); cx.arc(hx, hy, hr, 0, 7);
+    cx.strokeStyle = 'rgba(255,77,77,0.85)'; cx.lineWidth = 2; cx.setLineDash([6, 5]);
+    cx.stroke(); cx.setLineDash([]);
+  }
+  // fear tints the whole view — the organism's state, not the world's
+  if (d[15] > 0.05) {
+    cx.fillStyle = `rgba(255,60,60,${0.16 * d[15]})`; cx.fillRect(0, 0, S, S);
+  }
+
+  cx.beginPath(); cx.moveTo(px(d[0]), py(d[1])); cx.lineTo(px(d[2]), py(d[3]));
+  cx.strokeStyle = '#b8b8c4'; cx.lineWidth = 3; cx.stroke();
+  cx.beginPath(); cx.arc(px(d[0]), py(d[1]), 11, 0, 7);
+  cx.fillStyle = '#7a7a8a'; cx.fill();
+  cx.beginPath(); cx.arc(px(d[2]), py(d[3]), 6, 0, 7);
+  cx.fillStyle = '#d9a06a'; cx.fill();
+
+  if (d[9] > 0) {
+    cx.beginPath(); cx.arc(px(d[0]), py(d[1]), 22, 0, 7);
+    cx.strokeStyle = d[9] === 1 ? '#e0873f' : '#5fd06a'; cx.lineWidth = 3; cx.stroke();
+  }
+  if (d[11]) {
+    cx.fillStyle = 'rgba(255,77,77,0.16)'; cx.fillRect(0, 0, S, S);
+  }
+}
+
+function drawStrip(k) {
+  const w = st.width, h = st.height, n = 130;
+  sx.fillStyle = '#15151a'; sx.fillRect(0, 0, w, h);
+  for (let i = 0; i < n; i++) {
+    const j = k - n + i;
+    if (j < 0) continue;
+    sx.fillStyle = codeColour(F_[j][7]);
+    sx.fillRect(i * (w / n), 0, w / n + 1, h);
+  }
+}
+
+function render(k) {
+  const d = F_[k];
+  drawWorld(k); drawStrip(k);
+  document.getElementById('e-f').style.width = (d[4] * 100) + '%';
+  document.getElementById('e-v').textContent = d[4].toFixed(2);
+  const tf = document.getElementById('t-f');
+  tf.style.marginLeft = d[5] >= 0 ? '50%' : (50 + d[5] * 50) + '%';
+  tf.style.width = Math.abs(d[5]) * 50 + '%';
+  document.getElementById('t-v').textContent = d[5].toFixed(2);
+  document.getElementById('h-f').style.width = (d[6] * 100) + '%';
+  document.getElementById('h-v').textContent = d[6].toFixed(2);
+  document.getElementById('a-f').style.width = ((d[15] || 0) * 100) + '%';
+  document.getElementById('a-v').textContent = (d[15] || 0).toFixed(2);
+  document.getElementById('sw').style.background = codeColour(d[7]);
+  document.getElementById('code').textContent = d[7];
+  document.getElementById('time').textContent =
+    (k * D.dt).toFixed(1) + 's / ' + (N_ * D.dt).toFixed(0) + 's';
+  document.getElementById('scrub').value = k;
+}
+
+function tick() {
+  if (playing) {
+    for (let s = 0; s < speed; s++) {
+      const d = F_[f];
+      trail.push([d[0], d[1], d[4]]);
+      if (trail.length > 260) trail.shift();
+      if (d[11]) trail = [];
+      f = (f + 1) % N_;
+    }
+    render(f);
+  }
+  requestAnimationFrame(tick);
+}
+
+document.getElementById('scrub').max = N_ - 1;
+document.getElementById('play').onclick = e => {
+  playing = !playing; e.target.textContent = playing ? 'Pause' : 'Play';
+};
+document.getElementById('speed').onclick = e => {
+  speed = speed === 1 ? 3 : speed === 3 ? 8 : 1; e.target.textContent = speed + '×';
+};
+document.getElementById('scrub').oninput = e => {
+  f = +e.target.value; trail = []; render(f);
+};
+render(0); tick();
+
+// ── measurements ────────────────────────────────────────────────────────────
+const R = D.results;
+if (R) {
+  const el = document.getElementById('results');
+  let h = '';
+
+  if (R.mi) {
+    h += '<h2>What its symbols encode</h2><div class="note">The organism was ' +
+      'never told what any of these are. Green is how much of each fact its own ' +
+      'vocabulary carries; grey is an identical untrained network — the floor ' +
+      'you get from random features and the same number of symbols.</div><table>' +
+      '<tr><th>fact about its world</th><th>learned</th><th>untrained</th></tr>';
+    for (const k in R.mi) {
+      const t = R.mi[k][0], u = R.mi[k][1];
+      h += `<tr><td>${k}</td><td><span class="mibar" style="width:${t*110}px;background:var(--energy)"></span>${t.toFixed(2)}</td>` +
+           `<td><span class="mibar" style="width:${u*110}px;background:#4a4a58"></span>${u.toFixed(2)}</td></tr>`;
+    }
+    h += '</table>';
+  }
+
+  if (R.controls) {
+    h += '<h2>Does it read its own state, or just look like it?</h2><div class="note">' +
+      'Position and everything it can see are held fixed; only its internal state is ' +
+      'changed. A policy that cannot read itself scores zero however sensible it looks. ' +
+      '<b>gradient-only</b> is the control that matters — it senses which way is warmer ' +
+      'and always moves away, which resembles competent thermoregulation and involves ' +
+      'no self-knowledge at all.</div><table>' +
+      '<tr><th>policy</th><th>reads hunger</th><th>reads heat</th><th>right direction</th></tr>';
+    for (const c of R.controls) {
+      h += `<tr><td>${c[0]}</td><td>${c[1].toFixed(3)}</td><td>${c[2].toFixed(3)}</td>` +
+           `<td>${isNaN(c[3]) ? '—' : c[3].toFixed(2)}</td></tr>`;
+    }
+    h += '</table>';
+  }
+
+  if (R.survival) {
+    h += '<h2>Can it stay alive</h2><div class="note">Lifespan in hunger cycles — how ' +
+      'many times it solves the recurring problem, not how many seconds it lasted. ' +
+      'The hand-written policy is six lines and survives indefinitely. The learned one ' +
+      'is the open problem.</div><table><tr><th>policy</th><th>hunger cycles</th></tr>';
+    for (const r of R.survival) {
+      const cls = r[1] >= 10 ? 'pass' : 'fail';
+      h += `<tr><td>${r[0]}</td><td class="${cls}">${r[1].toFixed(1)}</td></tr>`;
+    }
+    h += '</table>';
+  }
+  el.innerHTML = h;
+}
+</script>

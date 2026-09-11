@@ -1,0 +1,17 @@
+step   25000  life     403  deaths   62  eaten    4.57  food-cont +0.279  temp-cont +0.083  [E62/T0]  (63s)
+step   50000  life     432  deaths  120  eaten    9.46  food-cont +0.004  temp-cont -0.002  [E119/T1]  (142s)
+step   75000  life     445  deaths  176  eaten   12.81  food-cont +0.177  temp-cont -0.212  [E175/T1]  (218s)
+step  100000  life     466  deaths  229  eaten   16.77  food-cont -0.101  temp-cont -0.051  [E228/T1]  (295s)
+step  125000  life     467  deaths  282  eaten   29.26  food-cont +0.002  temp-cont +0.211  [E277/T5]  (376s)
+step  150000  life     452  deaths  337  eaten   34.65  food-cont -0.008  temp-cont +0.289  [E329/T8]  (453s)
+step  175000  life     414  deaths  398  eaten   36.35  food-cont +0.124  temp-cont +0.066  [E390/T8]  (529s)
+step  200000  life     446  deaths  454  eaten   39.82  food-cont +0.251  temp-cont -0.075  [E446/T8]  (606s)
+step  225000  life     457  deaths  509  eaten   42.73  food-cont +0.310  temp-cont -0.108  [E498/T11]  (683s)
+
+==================================================================
+FINAL  mean lifespan 482  deaths 561
+  food contingency +0.031  temp contingency +0.337
+  survival gate    FAIL
+  contingency gate FAIL
+  /Users/ricmassey/fen/stage2/runs/g999-s0-fog1.0-233533
+==================================================================

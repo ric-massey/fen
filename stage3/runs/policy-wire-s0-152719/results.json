@@ -1,0 +1,104 @@
+{
+  "raw": {
+    "mode": "raw",
+    "deaths": 474,
+    "steps": 300000,
+    "mean_lifespan_all": 631.1962025316456,
+    "median_lifespan_all": 677.0,
+    "mean_lifespan_recent50": 759.98,
+    "history": [
+      {
+        "step": 75000,
+        "deaths": 150,
+        "recent_lifespan": 552.2,
+        "all_lifespan": 499.00666666666666,
+        "health": 1.0,
+        "elapsed": 226
+      },
+      {
+        "step": 150000,
+        "deaths": 261,
+        "recent_lifespan": 716.1,
+        "all_lifespan": 573.471264367816,
+        "health": 0.5925454263900249,
+        "elapsed": 489
+      },
+      {
+        "step": 225000,
+        "deaths": 372,
+        "recent_lifespan": 653.14,
+        "all_lifespan": 604.8279569892474,
+        "health": 1.0,
+        "elapsed": 884
+      }
+    ]
+  },
+  "+hidden": {
+    "mode": "+hidden",
+    "deaths": 477,
+    "steps": 300000,
+    "mean_lifespan_all": 628.5366876310272,
+    "median_lifespan_all": 635.0,
+    "mean_lifespan_recent50": 591.78,
+    "history": [
+      {
+        "step": 75000,
+        "deaths": 152,
+        "recent_lifespan": 456.22,
+        "all_lifespan": 493.3092105263158,
+        "health": 1.0,
+        "elapsed": 289
+      },
+      {
+        "step": 150000,
+        "deaths": 262,
+        "recent_lifespan": 684.32,
+        "all_lifespan": 569.1374045801526,
+        "health": 1.0,
+        "elapsed": 588
+      },
+      {
+        "step": 225000,
+        "deaths": 370,
+        "recent_lifespan": 825.86,
+        "all_lifespan": 606.8351351351351,
+        "health": 1.0,
+        "elapsed": 886
+      }
+    ]
+  },
+  "+code": {
+    "mode": "+code",
+    "deaths": 490,
+    "steps": 300000,
+    "mean_lifespan_all": 612.130612244898,
+    "median_lifespan_all": 628.5,
+    "mean_lifespan_recent50": 830.42,
+    "history": [
+      {
+        "step": 75000,
+        "deaths": 157,
+        "recent_lifespan": 516.36,
+        "all_lifespan": 476.3630573248408,
+        "health": 1.0,
+        "elapsed": 249
+      },
+      {
+        "step": 150000,
+        "deaths": 273,
+        "recent_lifespan": 670.04,
+        "all_lifespan": 548.1282051282051,
+        "health": 0.24219722667301377,
+        "elapsed": 525
+      },
+      {
+        "step": 225000,
+        "deaths": 391,
+        "recent_lifespan": 651.06,
+        "all_lifespan": 574.4322250639386,
+        "health": 0.4158081874882503,
+        "elapsed": 805
+      }
+    ]
+  }
+}

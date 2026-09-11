@@ -1,0 +1,96 @@
+<mujoco model="fen_stage2">
+  <!-- Stage 2 body: the Stage 1 arm mounted on a mobile base.
+
+       The base uses velocity actuators so travel is easy to learn. The arm keeps
+       torque control and the coupled dynamics Stage 1 already learned. The point
+       of Stage 2 is regulation, not motor skill — locomotion should not become
+       the problem being solved.
+
+       World: a bounded arena split into a warm half (+x) and a cool half (-x),
+       with food sites placed mostly in the warm half. Eating therefore costs
+       thermal comfort. That conflict is the whole design. -->
+
+  <compiler angle="radian" autolimits="true"/>
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="implicitfast"/>
+
+  <default>
+    <joint damping="0.6" armature="0.02"/>
+    <geom type="capsule" size="0.035" rgba="0.72 0.72 0.78 1" density="900"/>
+    <motor ctrlrange="-2.5 2.5" gear="1"/>
+  </default>
+
+  <worldbody>
+    <light pos="0 0 3" dir="0 0 -1"/>
+    <geom name="floor" type="plane" size="3 3 0.1" pos="0 0 0" rgba="0.26 0.26 0.31 1"/>
+
+    <!-- Zone markers: visual only, no collision. The agent never reads these;
+         it must infer the thermal gradient from its own interoception. -->
+    <geom name="warm_marker" type="box" size="1.5 1.5 0.001" pos="1.5 0 0.001"
+          rgba="0.55 0.28 0.22 0.35" contype="0" conaffinity="0"/>
+    <geom name="cool_marker" type="box" size="1.5 1.5 0.001" pos="-1.5 0 0.001"
+          rgba="0.22 0.32 0.55 0.35" contype="0" conaffinity="0"/>
+
+    <!-- Arena walls -->
+    <geom name="w_px" type="box" size="0.05 3 0.3" pos="3 0 0.3" rgba="0.35 0.35 0.4 1"/>
+    <geom name="w_nx" type="box" size="0.05 3 0.3" pos="-3 0 0.3" rgba="0.35 0.35 0.4 1"/>
+    <geom name="w_py" type="box" size="3 0.05 0.3" pos="0 3 0.3" rgba="0.35 0.35 0.4 1"/>
+    <geom name="w_ny" type="box" size="3 0.05 0.3" pos="0 -3 0.3" rgba="0.35 0.35 0.4 1"/>
+
+    <!-- Base height must exceed total arm length (0.73m) or the arm droops
+         through the floor, jams, and anchors the whole body in place. -->
+    <body name="base" pos="0 0 0.90">
+      <joint name="bx" type="slide" axis="1 0 0" range="-2.7 2.7" damping="6"/>
+      <joint name="by" type="slide" axis="0 1 0" range="-2.7 2.7" damping="6"/>
+      <geom name="base_geom" type="cylinder" size="0.16 0.12" rgba="0.45 0.45 0.52 1"
+            density="1200"/>
+
+      <body name="l1" pos="0 0 0.12">
+        <joint name="j1" type="hinge" axis="0 0 1" range="-3.0 3.0"/>
+        <geom fromto="0 0 0 0.20 0 0"/>
+
+        <body name="l2" pos="0.20 0 0">
+          <joint name="j2" type="hinge" axis="0 1 0" range="-2.2 2.2"/>
+          <geom fromto="0 0 0 0.20 0 0"/>
+
+          <body name="l3" pos="0.20 0 0">
+            <joint name="j3" type="hinge" axis="0 1 0" range="-2.2 2.2"/>
+            <geom fromto="0 0 0 0.18 0 0"/>
+
+            <body name="l4" pos="0.18 0 0">
+              <joint name="j4" type="hinge" axis="0 1 0" range="-2.2 2.2"/>
+              <geom name="tip_geom" fromto="0 0 0 0.15 0 0" rgba="0.85 0.6 0.4 1"/>
+              <site name="tip" pos="0.15 0 0" size="0.03" rgba="0.9 0.7 0.4 1"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+
+    <!-- Food sites. Visual only; depletion and regrowth are bookkeeping in
+         drives.py, and reaching one requires the arm tip to be near it. -->
+    <body name="food0" pos="1.2 1.0 0.08" mocap="true">
+      <geom type="sphere" size="0.12" rgba="0.45 0.8 0.4 1" contype="0" conaffinity="0"/>
+    </body>
+    <body name="food1" pos="2.1 -1.3 0.08" mocap="true">
+      <geom type="sphere" size="0.12" rgba="0.45 0.8 0.4 1" contype="0" conaffinity="0"/>
+    </body>
+    <body name="food2" pos="0.4 -2.0 0.08" mocap="true">
+      <geom type="sphere" size="0.12" rgba="0.45 0.8 0.4 1" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- Base: velocity control, travel is cheap to learn -->
+    <velocity name="vx" joint="bx" kv="12" ctrlrange="-1.2 1.2"/>
+    <velocity name="vy" joint="by" kv="12" ctrlrange="-1.2 1.2"/>
+    <!-- Arm: torque control, dynamics carried over from Stage 1 -->
+    <motor name="m1" joint="j1"/>
+    <motor name="m2" joint="j2"/>
+    <motor name="m3" joint="j3"/>
+    <motor name="m4" joint="j4"/>
+  </actuator>
+
+  <sensor>
+    <framepos name="tip_pos" objtype="site" objname="tip"/>
+  </sensor>
+</mujoco>

@@ -1,0 +1,28 @@
+[
+  {
+    "step": 50000,
+    "deaths": 120,
+    "died_energy": 120,
+    "died_temp": 0,
+    "mean_lifespan": 410.92,
+    "energy": 0.05840189754962921,
+    "temp": -0.2080046534538269,
+    "eaten_total": 22.55,
+    "elapsed": 138,
+    "contingency_food": 0.05346441287112669,
+    "contingency_temp": 0.045625714212295006
+  },
+  {
+    "step": 100000,
+    "deaths": 218,
+    "died_energy": 214,
+    "died_temp": 4,
+    "mean_lifespan": 541.26,
+    "energy": 0.6449311971664429,
+    "temp": 0.08368028700351715,
+    "eaten_total": 75.23,
+    "elapsed": 289,
+    "contingency_food": -0.32692454067266113,
+    "contingency_temp": 0.15009093728168002
+  }
+]

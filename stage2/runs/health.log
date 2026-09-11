@@ -1,0 +1,22 @@
+step  100000  life     601  deaths  191  eaten  113.46  food-cont +0.579  temp-cont -0.479  hp 0.73  (328s)
+step  200000  life     684  deaths  333  eaten  275.82  food-cont +0.544  temp-cont -0.242  hp 1.00  (783s)
+step  300000  life     760  deaths  474  eaten  461.34  food-cont +0.401  temp-cont -0.222  hp 0.25  (1218s)
+
+==================================================================
+FINAL  mean lifespan 673  deaths 621
+  food contingency +0.471  temp contingency -0.374
+  survival gate    FAIL
+  contingency gate PASS
+  /Users/ricmassey/fen/stage2/runs/H-reflex-s0-fog1.0-140223
+==================================================================
+step  100000  life     400  deaths  250  eaten   87.78  food-cont -0.190  temp-cont -0.373  hp 1.00  (292s)
+step  200000  life     489  deaths  466  eaten  211.64  food-cont -0.047  temp-cont -0.091  hp 0.87  (652s)
+step  300000  life     435  deaths  694  eaten  307.06  food-cont +0.105  temp-cont -0.219  hp 0.94  (1029s)
+
+==================================================================
+FINAL  mean lifespan 435  deaths 918
+  food contingency +0.178  temp contingency -0.086
+  survival gate    FAIL
+  contingency gate PASS
+  /Users/ricmassey/fen/stage2/runs/H-noreflex-s0-fog1.0-142951
+==================================================================

@@ -1,0 +1,38 @@
+
+=== attention ===
+  [attention]   1000  pred 0.1107  vq 0.0174  live 128/128  perplexity 110.0  (69s)
+  [attention]   2000  pred 0.1009  vq 0.0217  live 128/128  perplexity 111.8  (137s)
+  [attention]   3000  pred 0.0900  vq 0.0180  live 128/128  perplexity 109.7  (206s)
+  [attention]   4000  pred 0.1139  vq 0.0207  live 128/128  perplexity 106.2  (275s)
+  [attention]   5000  pred 0.1033  vq 0.0283  live 128/128  perplexity 107.2  (344s)
+
+=== no-attention ===
+  [no-attention]   1000  pred 0.1110  vq 0.0195  live 128/128  perplexity 110.2  (68s)
+  [no-attention]   2000  pred 0.1021  vq 0.0222  live 128/128  perplexity 113.6  (138s)
+  [no-attention]   3000  pred 0.0892  vq 0.0188  live 128/128  perplexity 112.4  (207s)
+  [no-attention]   4000  pred 0.1108  vq 0.0221  live 128/128  perplexity 110.0  (278s)
+  [no-attention]   5000  pred 0.1033  vq 0.0284  live 128/128  perplexity 109.5  (350s)
+
+=== untrained ===
+
+========================================================================
+                     pred    live   perplex
+attention          0.0988  128/128     106.9
+no-attention       0.1006  128/128     110.0
+untrained          0.2648    0/128       1.0
+
+Normalised MI(code ; ground truth) — fraction of each factor captured
+factor         recurrent    no-recur   untrained  gain vs untr
+x                  0.513       0.496       0.232        +0.281
+y                  0.526       0.494       0.173        +0.353
+energy             0.535       0.541       0.198        +0.338
+temp               0.561       0.542       0.191        +0.371
+health             0.505       0.490       0.200        +0.304
+near_food          0.537       0.501       0.235        +0.302
+warm               0.487       0.488       0.226        +0.261
+reflex             0.841       0.779       0.233        +0.609
+stress             0.781       0.629       0.192        +0.590
+
+context gain on prediction: +0.0018
+context gain on mean MI:    +0.0364  (context earns its place)
+written to runs/tfm-s0-153432

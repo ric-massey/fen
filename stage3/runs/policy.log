@@ -1,0 +1,23 @@
+frozen world model: runs/full-s0-150956/recurrent.pt
+
+=== raw ===
+  [raw     ]   75000  recent     552  all     499  deaths  150  hp 1.00  (226s)
+  [raw     ]  150000  recent     716  all     573  deaths  261  hp 0.59  (489s)
+  [raw     ]  225000  recent     653  all     605  deaths  372  hp 1.00  (884s)
+=== +hidden ===
+  [+hidden ]   75000  recent     456  all     493  deaths  152  hp 1.00  (289s)
+  [+hidden ]  150000  recent     684  all     569  deaths  262  hp 1.00  (588s)
+  [+hidden ]  225000  recent     826  all     607  deaths  370  hp 1.00  (886s)
+=== +code ===
+  [+code   ]   75000  recent     516  all     476  deaths  157  hp 1.00  (249s)
+  [+code   ]  150000  recent     670  all     548  deaths  273  hp 0.24  (525s)
+  [+code   ]  225000  recent     651  all     574  deaths  391  hp 0.42  (805s)
+
+==================================================================
+mode         mean life    median   deaths
+raw                631       677      474
++hidden            629       635      477
++code              612       628      490
+
+Stage 2 baseline for reference: ~673 with health, reflexes on
+written to runs/policy-wire-s0-152719

@@ -1,0 +1,17 @@
+step   25000  life   25000  deaths    0  eaten   57.52  food-cont +0.416  temp-cont -0.590  [E0/T0]  (69s)
+step   50000  life    4721  deaths   10  eaten   99.14  food-cont +0.251  temp-cont -0.704  [E10/T0]  (156s)
+step   75000  life    5193  deaths   13  eaten  143.16  food-cont +0.317  temp-cont -0.666  [E13/T0]  (238s)
+step  100000  life    5272  deaths   17  eaten  195.18  food-cont +0.353  temp-cont -0.596  [E17/T0]  (318s)
+step  125000  life    5544  deaths   19  eaten  250.95  food-cont +0.485  temp-cont -0.569  [E19/T0]  (399s)
+step  150000  life    5544  deaths   19  eaten  308.92  food-cont +0.427  temp-cont -0.586  [E19/T0]  (479s)
+step  175000  life    7889  deaths   22  eaten  361.77  food-cont +0.433  temp-cont -0.630  [E22/T0]  (560s)
+step  200000  life    8287  deaths   23  eaten  415.39  food-cont +0.374  temp-cont -0.629  [E23/T0]  (640s)
+step  225000  life    8610  deaths   24  eaten  473.46  food-cont +0.350  temp-cont -0.561  [E24/T0]  (721s)
+
+==================================================================
+FINAL  mean lifespan 8852  deaths 27
+  food contingency +0.349  temp contingency -0.574
+  survival gate    FAIL
+  contingency gate PASS
+  /Users/ricmassey/fen/stage2/runs/reflex-s0-fog1.0-051527
+==================================================================

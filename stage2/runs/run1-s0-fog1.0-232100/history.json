@@ -1,0 +1,101 @@
+[
+  {
+    "step": 25000,
+    "deaths": 62,
+    "mean_lifespan": 401.48,
+    "energy": 0.7335699796676636,
+    "temp": -0.007538830861449242,
+    "eaten_total": 4.9,
+    "elapsed": 67,
+    "contingency_food": -0.021569661901229702,
+    "contingency_temp": 0.24422585068668634
+  },
+  {
+    "step": 50000,
+    "deaths": 120,
+    "mean_lifespan": 430.2,
+    "energy": 0.8598170876502991,
+    "temp": 0.1215037852525711,
+    "eaten_total": 10.83,
+    "elapsed": 147,
+    "contingency_food": 0.12328454331241796,
+    "contingency_temp": 0.011379497961100729
+  },
+  {
+    "step": 75000,
+    "deaths": 172,
+    "mean_lifespan": 477.7,
+    "energy": 0.19872988760471344,
+    "temp": -0.22789782285690308,
+    "eaten_total": 25.41,
+    "elapsed": 227,
+    "contingency_food": 0.08669490981922841,
+    "contingency_temp": 0.06060397435343104
+  },
+  {
+    "step": 100000,
+    "deaths": 225,
+    "mean_lifespan": 479.5,
+    "energy": 0.7090663909912109,
+    "temp": -0.031924325972795486,
+    "eaten_total": 34.32,
+    "elapsed": 307,
+    "contingency_food": 0.03076824293506993,
+    "contingency_temp": 0.12202646979522618
+  },
+  {
+    "step": 125000,
+    "deaths": 279,
+    "mean_lifespan": 462.68,
+    "energy": 0.485747754573822,
+    "temp": -0.024558067321777344,
+    "eaten_total": 49.72,
+    "elapsed": 388,
+    "contingency_food": 0.10912300473578682,
+    "contingency_temp": 0.3087074702471008
+  },
+  {
+    "step": 150000,
+    "deaths": 328,
+    "mean_lifespan": 508.2,
+    "energy": 0.5610893368721008,
+    "temp": 0.5787028074264526,
+    "eaten_total": 60.5,
+    "elapsed": 468,
+    "contingency_food": -0.17511988482102694,
+    "contingency_temp": 0.14229190514454543
+  },
+  {
+    "step": 175000,
+    "deaths": 383,
+    "mean_lifespan": 454.36,
+    "energy": 0.7168835997581482,
+    "temp": 0.011149181053042412,
+    "eaten_total": 67.98,
+    "elapsed": 547,
+    "contingency_food": -0.1266573921621918,
+    "contingency_temp": -0.09951399458039965
+  },
+  {
+    "step": 200000,
+    "deaths": 437,
+    "mean_lifespan": 465.04,
+    "energy": 0.6699724793434143,
+    "temp": 0.15165789425373077,
+    "eaten_total": 77.99,
+    "elapsed": 628,
+    "contingency_food": 0.058419232378968344,
+    "contingency_temp": 0.19167849336224982
+  },
+  {
+    "step": 225000,
+    "deaths": 489,
+    "mean_lifespan": 478.58,
+    "energy": 0.7186160683631897,
+    "temp": -0.08824161440134048,
+    "eaten_total": 88.99,
+    "elapsed": 710,
+    "contingency_food": -0.11343094718459192,
+    "contingency_temp": -0.03191105369834646
+  }
+]

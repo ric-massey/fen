@@ -1,0 +1,16 @@
+{
+  "steps": 12000,
+  "seed": 0,
+  "warmup": 3000,
+  "seq_len": 32,
+  "burn_in": 8,
+  "batch": 16,
+  "update_every": 4,
+  "lr": 0.0003,
+  "gamma": 0.999,
+  "tau": 0.005,
+  "aux": 1.0,
+  "report_every": 4000,
+  "checkpoints": 0,
+  "tag": "smoke"
+}

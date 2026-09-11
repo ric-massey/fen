@@ -1,0 +1,18 @@
+{
+  "steps": 300000,
+  "seed": 0,
+  "warmup": 5000,
+  "update_every": 2,
+  "batch": 256,
+  "fog": 1.0,
+  "gamma": 0.999,
+  "target_entropy": null,
+  "no_reflex": false,
+  "temp_trigger": 0.55,
+  "energy_trigger": 0.3,
+  "reflex_cost": 0.25,
+  "report_every": 50000,
+  "tag": "v1mlp",
+  "quiet": false,
+  "checkpoints": 5
+}
